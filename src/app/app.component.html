@@ -1,0 +1,65 @@
+<div class="conatiner">
+	<header class="brand">Paper in Flames</header>
+	<div class="container-fluid">
+		<fieldset>
+			<legend>Details</legend>
+			<div align="center" class="searchBar">
+				<input type="text" class="searchInput" placeholder="Search.."/>
+				<button class="searchButton"><i class="fa fa-search"></i></button>
+				<button class="add"><i class="fa fa-user-plus" title="Add Member" (click)="add()"></i></button>
+			</div>
+			<br />
+			<div class="popup" id="popup">
+				<p>Do you want to edit?</p>
+				<button class="btn" value="yes" (click)="openEditPopup($event)">Yes</button>&nbsp;
+				<button class="btn cancel" value="no" (click)="openEditPopup($event)">No</button>
+			</div>
+			<div class="deletePopup" id="deletePopup">
+				<p>Do you really want to delete?</p>
+				<button class="btn" value="yes" (click)="delete($event)">Yes</button>&nbsp;
+				<button class="btn cancel" value="no" (click)="delete($event)">No</button>
+			</div>
+			<form name="familyForm">
+				<fieldset id="entryForm">
+					<legend>Save</legend>
+					<p>Item No :
+						<input [(ngModel)]="itemNum" type="number" name="itemNum" />
+            </p>
+						<p>Name :
+							<input [(ngModel)]="name" type="text" name="fname" />
+            </p>
+							<p>Family :
+								<input [(ngModel)]="family" type="text" name="family" />
+            </p>
+								<p>Birthday :
+									<input type="date" [(ngModel)]="birthday" max="{{currentDate}}" id="dateInput" name="birthday" />
+            </p>
+									<input [hidden]="editingIndex!==undefined" (click)="add()" type="button" value="Add"  class="btn"/>&nbsp;
+									<input [hidden]="editingIndex===undefined" (click)="edit()" type="button" value="Update" class="btn"/>&nbsp;
+									<input [hidden]="editingIndex===undefined" (click)="cancel()" type="button" value="Cancel"  class="btn cancel"/>
+        </fieldset>
+			</form>
+			<table>
+				<tbody>
+					<tr>
+						<th>Item No</th>
+						<th>Name</th>
+						<th>Family</th>
+						<th>Bday</th>
+						<th>Action</th>
+					</tr>
+					<tr *ngFor="let user of users; let i = index">
+						<td>{{user.itemNum}}</td>
+						<td>{{user.name}}</td>
+						<td>{{user.family}}</td>
+						<td>{{user.birthday?user.birthday:'--'}}</td>
+						<td>
+							<i class="fa fa-pencil action" (click)="setEditUser(i)" type="button" value="Edit" title="Edit"></i>
+							<i class="fa fa-close action" (click)="openDeletePopup(i)" type="button" value="Delete" title="Delete"></i>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</div>
+	<footer>Made with <3</footer> </div>
